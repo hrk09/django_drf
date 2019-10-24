@@ -17,19 +17,21 @@ app_name = 'musics'
 urlpatterns = [
     path('docs/', schema_view.with_ui('redoc'), name='api_docs'),
     path('swagger/', schema_view.with_ui('swagger'), name='api_swagger'),
-    
-    # comment 하나만 가져오는 url
-    path('comments/<int:music_pk>/', views.comment_detail, name='comment_detail'),
 
-    # artist 하나만 가져오는 url
-    path('artists/<int:music_pk>/', views.artist_detail, name='artist_detail'),
-
-    # 음악 하나만 가져오는 url
-    path('musics/<int:music_pk>/', views.music_detail, name='music_detail'),
-    
+    # COMMENT 
+    path('musics/<int:music_pk>/comments/', views.comments_create, name='comments_create'),
     path('comments/', views.comment_list, name='comment_list'),
+    path('comments/<int:comment_pk>/', views.comment_update_delete_detail, name='comment_update_delete_detail'),
+
+    # ARTIST
+    # artist 하나만 가져오는 url
+    path('artists/<int:artist_pk>/', views.artist_update_delete_detail, name='artist_update_delete_detail'),
     path('artists/',views.artist_list, name='artist_list'),
 
+    # MUSIC
+    path('musics/<int:music_pk>/', views.music_update_delete_detail, name='music_update_delete_detail'),
+
     # api/v1/musics/
-    path('musics/', views.music_list, name='music_list'),  # 모든 음악 가져오는 url    
+    # 모든 음악 가져오는 url
+    path('musics/', views.music_list, name='music_list'),   
 ]
